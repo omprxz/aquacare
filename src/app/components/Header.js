@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center p-4 bg-primary text-primary-content sticky top-0 z-50">
-      <div className="text-xl font-bold">Aquacare</div>
+      <div className="text-xl font-bold">AquaCare</div>
       <div className="flex-grow text-center">
         <Link href={getDashboardLink()}>
           <FaHome className="text-2xl inline-block" />
