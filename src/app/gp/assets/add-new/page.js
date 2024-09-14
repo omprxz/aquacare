@@ -4,11 +4,17 @@ import Header from "@/app/components/Header";
 import { FaSave, FaTimes } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 
+const conditions = ["Good", "Needs Repair", "Critical"];
+const statuses = ["Active", "Inactive", "Decommissioned"];
+const lifeExpectancies = Array.from({ length: 101 }, (_, i) => i + 1); // Life expectancy from 1 to 101 years
+
 const AddNewAsset = () => {
   const [assetType, setAssetType] = useState('');
   const [location, setLocation] = useState('');
   const [installationDate, setInstallationDate] = useState('');
   const [condition, setCondition] = useState('');
+  const [lastMaintenance, setLastMaintenance] = useState('');
+  const [maintenanceHistory, setMaintenanceHistory] = useState('');
   const [manufacturer, setManufacturer] = useState('');
   const [modelNumber, setModelNumber] = useState('');
   const [lifeExpectancy, setLifeExpectancy] = useState('');
@@ -18,7 +24,7 @@ const AddNewAsset = () => {
 
   const handleSave = () => {
     // Logic to save the asset data, e.g., send to an API or local state
-    alert(`Asset saved:\nType: ${assetType}\nLocation: ${location}\nInstallation Date: ${installationDate}\nCondition: ${condition}\nManufacturer: ${manufacturer}\nModel Number: ${modelNumber}\nLife Expectancy: ${lifeExpectancy}\nStatus: ${status}`);
+    alert(`Asset saved:\nType: ${assetType}\nLocation: ${location}\nInstallation Date: ${installationDate}\nCondition: ${condition}\nLast Maintenance: ${lastMaintenance}\nMaintenance History: ${maintenanceHistory}\nManufacturer: ${manufacturer}\nModel Number: ${modelNumber}\nLife Expectancy: ${lifeExpectancy}\nStatus: ${status}`);
     router.push('/gp/assets'); // Redirect to asset management page after saving
   };
 
@@ -43,13 +49,14 @@ const AddNewAsset = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="location" className="block text-gray-700 font-semibold mb-2">Location:</label>
-                <input
-                  type="text"
+                <label htmlFor="location" className="block text-gray-700 font-semibold mb-2">Location (GeoJSON):</label>
+                <textarea
                   id="location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   className="input input-bordered w-full"
+                  rows="3"
+                  placeholder='{"type": "Point", "coordinates": [longitude, latitude]}'
                 />
               </div>
               <div className="mb-4">
@@ -64,12 +71,37 @@ const AddNewAsset = () => {
               </div>
               <div className="mb-4">
                 <label htmlFor="condition" className="block text-gray-700 font-semibold mb-2">Condition:</label>
-                <input
-                  type="text"
+                <select
                   id="condition"
                   value={condition}
                   onChange={(e) => setCondition(e.target.value)}
                   className="input input-bordered w-full"
+                >
+                  <option value="">Select Condition</option>
+                  {conditions.map((cond, index) => (
+                    <option key={index} value={cond}>{cond}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="lastMaintenance" className="block text-gray-700 font-semibold mb-2">Last Maintenance Date:</label>
+                <input
+                  type="date"
+                  id="lastMaintenance"
+                  value={lastMaintenance}
+                  onChange={(e) => setLastMaintenance(e.target.value)}
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="maintenanceHistory" className="block text-gray-700 font-semibold mb-2">Maintenance History:</label>
+                <textarea
+                  id="maintenanceHistory"
+                  value={maintenanceHistory}
+                  onChange={(e) => setMaintenanceHistory(e.target.value)}
+                  className="input input-bordered w-full"
+                  rows="3"
+                  placeholder='Enter maintenance history as JSON or comma-separated list'
                 />
               </div>
               <div className="mb-4">
@@ -94,13 +126,17 @@ const AddNewAsset = () => {
               </div>
               <div className="mb-4">
                 <label htmlFor="lifeExpectancy" className="block text-gray-700 font-semibold mb-2">Life Expectancy (years):</label>
-                <input
-                  type="number"
+                <select
                   id="lifeExpectancy"
                   value={lifeExpectancy}
                   onChange={(e) => setLifeExpectancy(e.target.value)}
                   className="input input-bordered w-full"
-                />
+                >
+                  <option value="">Select Life Expectancy</option>
+                  {lifeExpectancies.map((year, index) => (
+                    <option key={index} value={year}>{year}</option>
+                  ))}
+                </select>
               </div>
               <div className="mb-4">
                 <label htmlFor="status" className="block text-gray-700 font-semibold mb-2">Status:</label>
@@ -111,9 +147,9 @@ const AddNewAsset = () => {
                   className="input input-bordered w-full"
                 >
                   <option value="">Select Status</option>
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                  <option value="Decommissioned">Decommissioned</option>
+                  {statuses.map((stat, index) => (
+                    <option key={index} value={stat}>{stat}</option>
+                  ))}
                 </select>
               </div>
               <div className="flex gap-4">

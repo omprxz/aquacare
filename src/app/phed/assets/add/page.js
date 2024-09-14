@@ -1,40 +1,27 @@
-// src/app/phed/assets/add/page.js
-"use client"
+"use client";
+import { useState } from 'react';
 import Header from "@/app/components/Header";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { FaSave, FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
-const AddAsset = () => {
-  const [formData, setFormData] = useState({
-    asset_type: "",
-    location: "",
-    installation_date: "",
-    condition: "",
-    last_maintenance: "",
-    maintenance_history: "",
-    manufacturer: "",
-    model_number: "",
-    life_expectancy: "",
-    status: ""
-  });
+const AddNewAsset = () => {
+  const [assetType, setAssetType] = useState('');
+  const [location, setLocation] = useState('');
+  const [installationDate, setInstallationDate] = useState('');
+  const [condition, setCondition] = useState('');
+  const [lastMaintenance, setLastMaintenance] = useState('');
+  const [maintenanceHistory, setMaintenanceHistory] = useState('');
+  const [manufacturer, setManufacturer] = useState('');
+  const [modelNumber, setModelNumber] = useState('');
+  const [lifeExpectancy, setLifeExpectancy] = useState('');
+  const [status, setStatus] = useState('');
 
   const router = useRouter();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add form submission logic here (e.g., API call to save asset data)
-    console.log("Asset added:", formData);
-
-    // Redirect to asset management page after successful submission
-    router.push('/phed/assets');
+  const handleSave = () => {
+    // Logic to save the asset data, e.g., send to an API or local state
+    alert(`Asset saved:\nType: ${assetType}\nLocation: ${location}\nInstallation Date: ${installationDate}\nCondition: ${condition}\nLast Maintenance: ${lastMaintenance}\nMaintenance History: ${maintenanceHistory}\nManufacturer: ${manufacturer}\nModel Number: ${modelNumber}\nLife Expectancy: ${lifeExpectancy}\nStatus: ${status}`);
+    router.push('/gp/assets'); // Redirect to asset management page after saving
   };
 
   return (
@@ -46,153 +33,127 @@ const AddAsset = () => {
 
           {/* Asset Form */}
           <div className="bg-white p-6 shadow-md rounded-md">
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="mb-4">
-                <label htmlFor="asset_type" className="block text-sm font-semibold mb-2">Asset Type</label>
-                <select
-                  id="asset_type"
-                  name="asset_type"
-                  value={formData.asset_type}
-                  onChange={handleChange}
-                  className="select select-bordered w-full"
-                  required
-                >
-                  <option value="" disabled>Select asset type</option>
-                  <option value="Pump">Pump</option>
-                  <option value="Pipeline">Pipeline</option>
-                  <option value="Valve">Valve</option>
-                  {/* Add other asset types as needed */}
-                </select>
+                <label htmlFor="assetType" className="block text-gray-700 font-semibold mb-2">Asset Type:</label>
+                <input
+                  type="text"
+                  id="assetType"
+                  value={assetType}
+                  onChange={(e) => setAssetType(e.target.value)}
+                  className="input input-bordered w-full"
+                />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="location" className="block text-sm font-semibold mb-2">Location (GeoJSON)</label>
+                <label htmlFor="location" className="block text-gray-700 font-semibold mb-2">Location (GeoJSON):</label>
                 <textarea
                   id="location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  className="textarea textarea-bordered w-full"
-                  placeholder='{"type": "Point", "coordinates": [longitude, latitude]}'
-                  required
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="input input-bordered w-full"
+                  rows="3"
+                  placeholder='{"type": &quot;Point&quot;, "coordinates": [longitude, latitude]}'
                 />
-                <small className="text-gray-500">Use GeoJSON format for location (e.g., {"{"}type: &quot;Point&quot;, coordinates: [longitude, latitude]{"}"}).</small>
               </div>
-
               <div className="mb-4">
-                <label htmlFor="installation_date" className="block text-sm font-semibold mb-2">Installation Date</label>
+                <label htmlFor="installationDate" className="block text-gray-700 font-semibold mb-2">Installation Date:</label>
                 <input
                   type="date"
-                  id="installation_date"
-                  name="installation_date"
-                  value={formData.installation_date}
-                  onChange={handleChange}
+                  id="installationDate"
+                  value={installationDate}
+                  onChange={(e) => setInstallationDate(e.target.value)}
                   className="input input-bordered w-full"
-                  required
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="condition" className="block text-sm font-semibold mb-2">Condition</label>
-                <select
+                <label htmlFor="condition" className="block text-gray-700 font-semibold mb-2">Condition:</label>
+                <input
+                  type="text"
                   id="condition"
-                  name="condition"
-                  value={formData.condition}
-                  onChange={handleChange}
-                  className="select select-bordered w-full"
-                  required
-                >
-                  <option value="" disabled>Select condition</option>
-                  <option value="Excellent">Excellent</option>
-                  <option value="Good">Good</option>
-                  <option value="Fair">Fair</option>
-                  <option value="Poor">Poor</option>
-                </select>
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="last_maintenance" className="block text-sm font-semibold mb-2">Last Maintenance Date</label>
-                <input
-                  type="date"
-                  id="last_maintenance"
-                  name="last_maintenance"
-                  value={formData.last_maintenance}
-                  onChange={handleChange}
+                  value={condition}
+                  onChange={(e) => setCondition(e.target.value)}
                   className="input input-bordered w-full"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="maintenance_history" className="block text-sm font-semibold mb-2">Maintenance History</label>
-                <textarea
-                  id="maintenance_history"
-                  name="maintenance_history"
-                  value={formData.maintenance_history}
-                  onChange={handleChange}
-                  className="textarea textarea-bordered w-full"
-                  placeholder="e.g., 2023-01-15: Replaced pump seals, 2022-12-20: Cleaned filter"
+                <label htmlFor="lastMaintenance" className="block text-gray-700 font-semibold mb-2">Last Maintenance Date:</label>
+                <input
+                  type="date"
+                  id="lastMaintenance"
+                  value={lastMaintenance}
+                  onChange={(e) => setLastMaintenance(e.target.value)}
+                  className="input input-bordered w-full"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="manufacturer" className="block text-sm font-semibold mb-2">Manufacturer</label>
+                <label htmlFor="maintenanceHistory" className="block text-gray-700 font-semibold mb-2">Maintenance History:</label>
+                <textarea
+                  id="maintenanceHistory"
+                  value={maintenanceHistory}
+                  onChange={(e) => setMaintenanceHistory(e.target.value)}
+                  className="input input-bordered w-full"
+                  rows="3"
+                  placeholder='Enter maintenance history as JSON or comma-separated list'
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="manufacturer" className="block text-gray-700 font-semibold mb-2">Manufacturer:</label>
                 <input
                   type="text"
                   id="manufacturer"
-                  name="manufacturer"
-                  value={formData.manufacturer}
-                  onChange={handleChange}
+                  value={manufacturer}
+                  onChange={(e) => setManufacturer(e.target.value)}
                   className="input input-bordered w-full"
-                  placeholder="Enter manufacturer name"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="model_number" className="block text-sm font-semibold mb-2">Model Number</label>
+                <label htmlFor="modelNumber" className="block text-gray-700 font-semibold mb-2">Model Number:</label>
                 <input
                   type="text"
-                  id="model_number"
-                  name="model_number"
-                  value={formData.model_number}
-                  onChange={handleChange}
+                  id="modelNumber"
+                  value={modelNumber}
+                  onChange={(e) => setModelNumber(e.target.value)}
                   className="input input-bordered w-full"
-                  placeholder="Enter model number or specifications"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="life_expectancy" className="block text-sm font-semibold mb-2">Life Expectancy (Years)</label>
+                <label htmlFor="lifeExpectancy" className="block text-gray-700 font-semibold mb-2">Life Expectancy (years):</label>
                 <input
                   type="number"
-                  id="life_expectancy"
-                  name="life_expectancy"
-                  value={formData.life_expectancy}
-                  onChange={handleChange}
+                  id="lifeExpectancy"
+                  value={lifeExpectancy}
+                  onChange={(e) => setLifeExpectancy(e.target.value)}
                   className="input input-bordered w-full"
-                  placeholder="Enter estimated lifespan in years"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="status" className="block text-sm font-semibold mb-2">Status</label>
+                <label htmlFor="status" className="block text-gray-700 font-semibold mb-2">Status:</label>
                 <select
                   id="status"
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                  className="select select-bordered w-full"
-                  required
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="input input-bordered w-full"
                 >
-                  <option value="" disabled>Select status</option>
+                  <option value="">Select Status</option>
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
                   <option value="Decommissioned">Decommissioned</option>
                 </select>
               </div>
-
-              <div className="mb-4">
-                <button type="submit" className="btn btn-primary w-full">
-                  Add Asset
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  className="btn btn-primary flex items-center gap-2"
+                >
+                  <FaSave /> Save Asset
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push('/gp/assets')}
+                  className="btn btn-secondary flex items-center gap-2"
+                >
+                  <FaTimes /> Cancel
                 </button>
               </div>
             </form>
@@ -203,4 +164,4 @@ const AddAsset = () => {
   );
 };
 
-export default AddAsset;
+export default AddNewAsset;
