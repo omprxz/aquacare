@@ -8,8 +8,8 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section className="hero min-h-[60vh] bg-white flex items-center justify-center shadow-md">
         <div className="container mx-auto text-center px-6 py-12">
-          <h1 className="text-4xl font-semibold mb-4">Aquacare</h1>
-          <p className="text-lg mb-6 text-gray-600">Effortlessly manage your water resources with Aquacare.</p>
+          <h1 className="text-4xl font-semibold mb-4">AquaCare</h1>
+          <p className="text-lg mb-6 text-gray-600">Effortlessly manage your water resources with AquaCare.</p>
           <Link href="/auth/login">
             <button className="btn btn-outline px-6 py-2 text-lg font-medium rounded-md border-gray-500 text-gray-800 hover:bg-gray-100">
               Get Started
