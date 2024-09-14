@@ -21,7 +21,9 @@ const GP_Settings = () => {
                   type="email"
                   id="admin-email"
                   name="admin-email"
-                  className="form-input"
+                  className="input input-bordered w-full"
+                  value="deo@phed.gov.in"
+                  readOnly
                 />
               </div>
               <div className="mb-4">
@@ -31,7 +33,7 @@ const GP_Settings = () => {
                 <select
                   id="timezone"
                   name="timezone"
-                  className="form-select"
+                  className="input input-bordered w-full"
                 >
                   <option value="GMT">GMT</option>
                   <option value="UTC">UTC</option>
@@ -47,11 +49,13 @@ const GP_Settings = () => {
                   type="text"
                   id="currency"
                   name="currency"
-                  className="form-input"
+                  className="input input-bordered w-full"
+                  value="INR"
+                  readOnly
                 />
               </div>
               <div className="mb-4">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary w-full">
                   Save Settings
                 </button>
               </div>

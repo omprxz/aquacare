@@ -10,7 +10,7 @@ const LandingPage = () => {
         <div className="container mx-auto text-center px-6 py-12">
           <h1 className="text-4xl font-semibold mb-4">Aquacare</h1>
           <p className="text-lg mb-6 text-gray-600">Effortlessly manage your water resources with Aquacare.</p>
-          <Link href="/auth/register">
+          <Link href="/auth/login">
             <button className="btn btn-outline px-6 py-2 text-lg font-medium rounded-md border-gray-500 text-gray-800 hover:bg-gray-100">
               Get Started
             </button>
