@@ -76,7 +76,7 @@ const AddAsset = () => {
                   placeholder='{"type": "Point", "coordinates": [longitude, latitude]}'
                   required
                 />
-                <small className="text-gray-500">Use GeoJSON format for location (e.g., {"{"}type: "Point", coordinates: [longitude, latitude]{"}"}).</small>
+                <small className="text-gray-500">Use GeoJSON format for location (e.g., {"{"}type: &quot;Point&quot;, coordinates: [longitude, latitude]{"}"}).</small>
               </div>
 
               <div className="mb-4">
