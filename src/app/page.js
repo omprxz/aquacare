@@ -1,90 +1,45 @@
-import Link from 'next/link';
-import { FaCog, FaChartLine, FaExclamationTriangle, FaBell, FaChartBar, FaUser } from 'react-icons/fa';
-import Footer from '@/app/components/Footer';
+"use client";
 
-const LandingPage = () => {
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-100 text-gray-900">
-      {/* Hero Section */}
-      <section className="hero min-h-[60vh] bg-white flex items-center justify-center shadow-md">
-        <div className="container mx-auto text-center px-6 py-12">
-          <h1 className="text-4xl font-semibold mb-4">AquaCare</h1>
-          <p className="text-lg mb-6 text-gray-600">Effortlessly manage your water resources with AquaCare.</p>
-          <Link href="/auth/login">
-            <button className="btn btn-outline px-6 py-2 text-lg font-medium rounded-md border-gray-500 text-gray-800 hover:bg-gray-100">
-              Get Started
-            </button>
-          </Link>
+export default function LandingPage() {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
+            <header className="text-center mb-10">
+                <h1 className="text-4xl font-extrabold text-blue-800 mb-4">Welcome to AquaCare</h1>
+                <p className="text-lg text-gray-700">
+                    Your opinion matters! Help us improve water supply and quality.
+                </p>
+            </header>
+            <main className="flex flex-col space-y-4">
+                <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md mx-auto">
+                    <h2 className="text-2xl font-semibold text-blue-700 mb-4">Get Involved</h2>
+                    <p className="text-gray-600 mb-6">
+                        Participate in our initiatives and provide valuable feedback.
+                    </p>
+                    <div className="flex flex-col space-y-4">
+                        <a
+                            href="/survey/feedback-form"
+                            className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition duration-300"
+                        >
+                            Take Survey
+                        </a>
+                        <a
+                            href="/prototype"
+                            className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition duration-300"
+                        >
+                            View Prototype
+                        </a>
+                        <button
+                            disabled
+                            className="block w-full text-center bg-gray-300 cursor-not-allowed text-gray-500 font-bold py-2 rounded-lg"
+                        >
+                            Download AquaCare.apk (Coming Soon)
+                        </button>
+                    </div>
+                </div>
+            </main>
+            <footer className="mt-10">
+                <p className="text-gray-600">© 2024 AquaCare. All rights reserved.</p>
+            </footer>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-semibold text-center mb-8 text-gray-800">Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="card bg-white shadow-md">
-              <div className="card-body p-6 flex items-center">
-                <FaCog className="text-gray-500 text-3xl mr-4" />
-                <div>
-                  <h3 className="card-title text-xl font-semibold">Real-Time Monitoring</h3>
-                  <p>Monitor your water supply in real-time to ensure efficient usage.</p>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-white shadow-md">
-              <div className="card-body p-6 flex items-center">
-                <FaChartLine className="text-gray-500 text-3xl mr-4" />
-                <div>
-                  <h3 className="card-title text-xl font-semibold">Automated Billing</h3>
-                  <p>Automate the billing process for convenience and accuracy.</p>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-white shadow-md">
-              <div className="card-body p-6 flex items-center">
-                <FaExclamationTriangle className="text-gray-500 text-3xl mr-4" />
-                <div>
-                  <h3 className="card-title text-xl font-semibold">Issue Reporting</h3>
-                  <p>Report issues with ease and track their status seamlessly.</p>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-white shadow-md">
-              <div className="card-body p-6 flex items-center">
-                <FaChartBar className="text-gray-500 text-3xl mr-4" />
-                <div>
-                  <h3 className="card-title text-xl font-semibold">Data Analytics</h3>
-                  <p>Analyze water usage data to make informed decisions.</p>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-white shadow-md">
-              <div className="card-body p-6 flex items-center">
-                <FaBell className="text-gray-500 text-3xl mr-4" />
-                <div>
-                  <h3 className="card-title text-xl font-semibold">Custom Alerts</h3>
-                  <p>Set up alerts to stay informed about important parameters.</p>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-white shadow-md">
-              <div className="card-body p-6 flex items-center">
-                <FaUser className="text-gray-500 text-3xl mr-4" />
-                <div>
-                  <h3 className="card-title text-xl font-semibold">User-Friendly Interface</h3>
-                  <p>Enjoy a clean and intuitive interface for easy management.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer Section */}
-      <Footer /> {/* Use the Footer component */}
-    </div>
-  );
-};
-
-export default LandingPage;
+    );
+}
